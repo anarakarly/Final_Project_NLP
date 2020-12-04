@@ -1,6 +1,7 @@
 # Word2Vec Application Tutorial
 
-The tutorial was created as a final project for IDCE 30274 Programming in GIS taught by professor Shadrock Robests at Clark University.
+The tutorial was created as a final project for IDCE 30274 Programming in GIS taught by professor Shadrock Robests at Clark University. 
+Author: Anara Sharzhau
 
 In this tutorial, we will learn how to perform basic operations on word vectors. Word vectors represent words as multidimensional continuous floating point numbers where semantically similar words are mapped to proximate points in geometric space. In simpler terms, a word vector is a row of real-valued numbers where each point captures a dimension of the word's meaning and where semantically similar words have similar vectors. While there are many Natural Language Processing (NLP) libraries in Python, such as NLTK, gensim, and spaCy, we will use spaCy in this tutorial. SpaCy is popular NLP library and it provides built-in support for word vectors.
 
@@ -306,3 +307,5 @@ https://www.sciencedirect.com/topics/computer-science/cosine-similarity#:~:text=
 https://www.codegrepper.com/code-examples/rust/OSError%3A+%5BE050%5D+Can%27t+find+model+%27en_core_web_lg%27.+It+doesn%27t+seem+to+be+a+shortcut+link%2C+a+Python+package+or+a+valid+path+to+a+data+directory.
 
 https://colab.research.google.com/drive/1X3XmmomQZrR-rPGbo_w6yydDbui86tzK 
+
+https://projector.tensorflow.org/ 
