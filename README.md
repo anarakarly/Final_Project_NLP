@@ -1,17 +1,84 @@
-# Interactive Maps with Folium!
-This tutorial uses a Python library called [Folium](https://python-visualization.github.io/folium/), which builds on a common web mapping javascript library called [Leaflet](https://leafletjs.com/). Basically, Folium brings the power of Leaflet JavaScript into Python, which means you can build really nice, interactive maps right into your Python notebook!
+# Word2Vec Application Tutorial
 
-We'll write code to quickly and easily create interactive maps of Starbucks locations in Los Angeles County. Those of you who live in MA and have sworn an oath to Dunkin' will appreciate this, no doubt. By the end, you'll be able to create:
-- A choropleth map which shades in LA County zip codes based on how many Starbucks are contained in each one (and you'll learn why this is a _terrible_ idea!)
-- A precise map of all Starbucks' locations in LA County
+The tutorial was created as a final project for IDCE 30274 Programming in GIS taught by professor Shadrock Robests at Clark University.
 
-### To complete this assignment you will need:
+In this tutorial, we will learn how to perform basic operations on word vectors. Word vectors represent words as multidimensional continuous floating point numbers where semantically similar words are mapped to proximate points in geometric space. In simpler terms, a word vector is a row of real-valued numbers where each point captures a dimension of the word's meaning and where semantically similar words have similar vectors. While there are many Natural Language Processing (NLP) libraries in Python, such as NLTK, gensim, and spaCy, we will use spaCy in this tutorial. SpaCy is popular NLP library and it provides built-in support for word vectors.
+
+## What is Word2Vec?
+Word2Vec is a technique for natural language processing. The word2vec algorithm uses a neural network model to learn word associations from a large corpus of text. Once trained, such a model can detect synonymous words or suggest additional words for a partial sentence. As the name implies, word2vec represents each distinct word with a particular list of numbers called a vector. The vectors are chosen carefully such that a simple mathematical function (the cosine similarity between the vectors) indicates the level of semantic similarity between the words represented by those vectors.
+
+Our goal is to learn:
+
+* Popular Python machine learning packages (spaCy, sklearn)
+* Calculating word similarity using Word2Vec model
+* Word analogy analysis
+* Calculating sentence similarity using Word2Vec model
+* Dimension reduction techniques for high-dimensional vectors
+* Visualizing Word2Vec in 2D space
+* Sentiment analysis using logistic regression and Word2Vec
+
+### To follow this this tutorial you will need:
 - A Google account and a Colab notebook.
 - Data downloaded from this repo to upload to Colab (or copy to your Google Drive and mount that to Colab).
-- If you're *not* using Colab, you'll need a Python coding environment with [Pandas](https://pandas.pydata.org/), [Folium](https://python-visualization.github.io/folium/), and [JSON](https://docs.python.org/3/library/json.html) libraries.
 
-### What you will submit:
-A link to your Github repo. The repo must contain your Python code (either as script in `.py` or a notebook in `.ipynb` format). Your `README` should contain a brief description of the lab along with a 150-200 word discussion about what you learned.
+### Getting started 
+
+First, let's install the spaCy Python library and download their model for the English language. We only need to do it once. Then we can import the spaCy library and other useful libraries such as numpy (used for linear algebra and vector operations in Python). We can load our downloaded English model in our environment.
+
+```Python
+!pip install spacy
+!python -m spacy download en_core_web_lg
+```
+Then, import the following packages: 
+```Python
+# import packages
+import spacy
+import numpy as np
+import csv
+from sklearn.manifold import TSNE
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+%matplotlib inline
+from IPython.display import clear_output
+```
+It is also crucial to load English language model if you are going to work with English. Other language models available [here](https://spacy.io/models). 
+There are two ways of downloading the language model. The reason why I specify two of them here is because sometimes we can get an error while loading a model. Therefore, it is good to have two options available. Please remember that yiu need to choose *only one* option!
+
+1. 
+```Python
+nlp = spacy.load('en_core_web_lg')
+```
+2. 
+```Python
+import en_core_web_lg
+nlp = en_core_web_lg.load()
+```
+
+## Word similarity
+
+By representing words in vectors, we can use linear algebra and vector space models to analyze the relationship between words. One simple task is to calculate the cosine of two word vectors, namely the cosine similarity. This cosine similarity measures the semantic similarity of words. While the value ranges from -1 to 1, it is usually used in the non-negative space [0, 1] where 0 means 0 similarity and 1 means extremely similar or even identical.
+
+In order to calculate the cosine similarity between words, we have to know their vector representations first, which are provided by the Word2Vec model. In the spaCy English model, these vector representations (pretrained using Word2Vec) are already provided. All we need to do is to retrieve these words from the spaCy English model and we will have access to these vector representations.
+
+```Python
+# retrieve words from the English model vocabulary
+lime = nlp.vocab['lime']
+bike = nlp.vocab['bike']
+storm = nlp.vocab['storm']
+
+# print the dimension of word vectors
+print('vector length:', len(lime.vector))
+
+# print the word vector
+print('lime:', lime.vector)
+```
+
+
+
+
+
+
+
 
 ### Why this lab is important
 In this lab, we'll be using a Pandas dataframe to combine different parts of datasets to create an interactive map. In Pandas, you can think of the dataframe as a version of a spreadsheet: it is the most commonly used Pandas data structure. You can [learn more about Pandas data structures here](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). You'll also learn about Folium. I mean... interactive maps, who can resist?!?! Finally, we're going to critically look at some of the choices we're making with our inputs and how the data we're using actually create a lousy map.
