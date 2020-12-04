@@ -9,16 +9,14 @@ Word2Vec is a technique for natural language processing. The word2vec algorithm 
 
 Our goal is to learn:
 
-* Popular Python machine learning packages (spaCy, sklearn)
+* Python machine learning package (spaCy)
 * Calculating word similarity using Word2Vec model
 * Word analogy analysis
 * Calculating sentence similarity using Word2Vec model
-* Dimension reduction techniques for high-dimensional vectors
 * Visualizing Word2Vec in 2D space
 
 ### To follow this this tutorial you will need:
 - A Google account and a Colab notebook.
-- Data downloaded from this repo to upload to Colab (or copy to your Google Drive and mount that to Colab).
 
 ### Getting started 
 
@@ -55,26 +53,26 @@ nlp = en_core_web_lg.load()
 
 ## Word similarity
 
-By representing words in vectors, we can use linear algebra and vector space models to analyze the relationship between words. One simple task is to calculate the cosine of two word vectors, namely the cosine similarity. This cosine similarity measures the semantic similarity of words. While the value ranges from -1 to 1, it is usually used in the non-negative space [0, 1] where 0 means 0 similarity and 1 means extremely similar or even identical.
+By representing words in vectors, we can use linear algebra and vector space models to analyze the relationship between words. One simple task is to calculate the cosine of two word vectors, namely the [cosine similarity](https://www.sciencedirect.com/topics/computer-science/cosine-similarity#:~:text=Cosine%20similarity%20measures%20the%20similarity,document%20similarity%20in%20text%20analysis.). This cosine similarity measures the semantic similarity of words. While the value ranges from -1 to 1, it is usually used in the non-negative space [0, 1] where 0 means 0 similarity and 1 means extremely similar or even identical.
 
 In order to calculate the cosine similarity between words, we have to know their vector representations first, which are provided by the Word2Vec model. In the spaCy English model, these vector representations (pretrained using Word2Vec) are already provided. All we need to do is to retrieve these words from the spaCy English model and we will have access to these vector representations.
 
 ```Python
 # retrieve words from the English model vocabulary
-lime = nlp.vocab['lime']
-bike = nlp.vocab['bike']
-storm = nlp.vocab['storm']
+tiger = nlp.vocab['tiger']
+cat = nlp.vocab['cat']
+train = nlp.vocab['train']
 
 # print the dimension of word vectors
-print('vector length:', len(lime.vector))
+print('vector length:', len(tiger.vector))
 
 # print the word vector
-print('lime:', lime.vector)
+print('tiger:', tiger.vector)
 ```
 
 The result should look like this: 
 
-INSERT PHOTO 
+![](Images/Output1.png)
 
 
 After retrieving the words and their vector representations, we can use the built-in similarity function (which implements cosine similarity) to calculate word similarity based on these vectors. Is 'tiger' more similar to 'cat' than 'train'? Can you find some properties of cosine similarity?
@@ -88,8 +86,17 @@ print('The similarity between cat and train:', cat.similarity(train))
 print('The similarity between train and tiger:', train.similarity(tiger))
 print('The similarity between cat and tiger:', cat.similarity(tiger))
 ```
+`The similarity between tiger and tiger: 1.0
 
-Now let's try some other words. Also, try to calculate the cosine similarity between 'hotel' and 'motel' and the cosine similarity between 'hotel' and 'hospital'. Which one is more similar to 'hotel'? 'motel' or 'hospital'?
+The similarity between tiger and cat: 0.541339
+
+The similarity between cat and train: 0.26588532
+
+The similarity between train and tiger: 0.2512126
+
+The similarity between cat and tiger: 0.541339`
+
+Now let's try some other words. Try to calculate the cosine similarity between 'hotel' and 'motel' and the cosine similarity between 'hotel' and 'hospital'. Which one is more similar to 'hotel'? 'motel' or 'hospital'?
 
 ```Python
 # calculate the similarity of your own words using the built-in function
@@ -154,6 +161,8 @@ Paris - France = Madrid - Spain
 
 These relationships can be reconstructed using word embeddings.
 
+![](Images/example1.png)
+
 Run the code below. 
 
 ```Python
@@ -183,7 +192,6 @@ print('Similarity between queen and result:', cosine(result, queen.vector))
 # and words that actually have vectors (.has_vector) 
 # and filter out 'king', 'man', and 'woman'
 allwords = [w for w in nlp.vocab if w.has_vector and w.is_lower and w.lower_ != 'king' and w.lower_ != 'man' and w.lower_ != 'woman']
-#############################################
 
 # calculate the cosine similarity between the 'result' vector 
 # and all word vectors in our vocabulary
@@ -278,13 +286,21 @@ plt.show()
 ```
 The output might look like this: 
 
-PHOTO
+![](Images/Output2.png)
 
-### Why this lab is important
-In this lab, we'll be using a Pandas dataframe to combine different parts of datasets to create an interactive map. In Pandas, you can think of the dataframe as a version of a spreadsheet: it is the most commonly used Pandas data structure. You can [learn more about Pandas data structures here](https://pandas.pydata.org/pandas-docs/stable/user_guide/dsintro.html). You'll also learn about Folium. I mean... interactive maps, who can resist?!?! Finally, we're going to critically look at some of the choices we're making with our inputs and how the data we're using actually create a lousy map.
 
 # Next steps 
-Today, we learned how to perform basic operations on word vectors. 
+Today, we learned how to perform basic operations on word vectors. To explore more about Natural Language Processing tools you can use following resources: 
+
+* [NLTK](https://www.youtube.com/watch?v=X2vAabgKiuM)
+
+* [Intro to NLP] (https://medium.com/towards-artificial-intelligence/natural-language-processing-nlp-with-python-tutorial-for-beginners-1f54e610a1a0)
+
+* [Text classification from scratch](https://keras.io/examples/nlp/text_classification_from_scratch/) 
 
 # Citation
-This tutorial is based on [this Medium Tutorial by Ritvik Kharkar](https://towardsdatascience.com/making-3-easy-maps-with-python-fb7dfb1036) and the associated [Github repo for his tutorial](https://github.com/ritvikmath/StarbucksStoreScraping). I've updated deprecated Folium code; re-orderd some of the steps to explain how his use of zip codes as a geography, while well intentioned and executed, is a huge conceptual problem; and added a brief follow-up showing a solid use of administrative units for choropleth maps.
+
+https://www.sciencedirect.com/topics/computer-science/cosine-similarity#:~:text=Cosine%20similarity%20measures%20the%20similarity,document%20similarity%20in%20text%20analysis. 
+
+https://www.codegrepper.com/code-examples/rust/OSError%3A+%5BE050%5D+Can%27t+find+model+%27en_core_web_lg%27.+It+doesn%27t+seem+to+be+a+shortcut+link%2C+a+Python+package+or+a+valid+path+to+a+data+directory.
+
