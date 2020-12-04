@@ -294,7 +294,7 @@ Today, we learned how to perform basic operations on word vectors. To explore mo
 
 * [NLTK](https://www.youtube.com/watch?v=X2vAabgKiuM)
 
-* [Intro to NLP] (https://medium.com/towards-artificial-intelligence/natural-language-processing-nlp-with-python-tutorial-for-beginners-1f54e610a1a0)
+* [Intro to NLP](https://medium.com/towards-artificial-intelligence/natural-language-processing-nlp-with-python-tutorial-for-beginners-1f54e610a1a0)
 
 * [Text classification from scratch](https://keras.io/examples/nlp/text_classification_from_scratch/) 
 
