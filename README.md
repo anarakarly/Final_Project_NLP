@@ -215,6 +215,7 @@ allwords = [w for w in nlp.vocab if w.has_vector and w.lower_ != 'tokyo' and w.l
 candidates = sorted(allwords, key=lambda w: cosine(maybe_Vietnam, w.vector), reverse=True)
 print([c.text for c in candidates [:5]])
 ```
+Output: `['VietNam', 'VIETNAM', 'vietnam', 'Vietnam', 'cambodia']`
 
 ## Sentence/Document Level Similarity
 
@@ -286,7 +287,7 @@ plt.show()
 ```
 The output might look like this: 
 
-![](Images/Output2.png)
+![](Images/output2.png)
 
 
 # Next steps 
@@ -304,3 +305,4 @@ https://www.sciencedirect.com/topics/computer-science/cosine-similarity#:~:text=
 
 https://www.codegrepper.com/code-examples/rust/OSError%3A+%5BE050%5D+Can%27t+find+model+%27en_core_web_lg%27.+It+doesn%27t+seem+to+be+a+shortcut+link%2C+a+Python+package+or+a+valid+path+to+a+data+directory.
 
+https://colab.research.google.com/drive/1X3XmmomQZrR-rPGbo_w6yydDbui86tzK 
