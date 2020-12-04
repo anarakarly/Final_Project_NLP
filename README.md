@@ -10,7 +10,7 @@ Word2Vec is a technique for natural language processing. The word2vec algorithm 
 
 Our goal is to learn:
 
-* Python machine learning package (spaCy)
+* Python machine learning package (spaCy,sklearn)
 * Calculating word similarity using Word2Vec model
 * Word analogy analysis
 * Calculating sentence similarity using Word2Vec model
@@ -87,6 +87,7 @@ print('The similarity between cat and train:', cat.similarity(train))
 print('The similarity between train and tiger:', train.similarity(tiger))
 print('The similarity between cat and tiger:', cat.similarity(tiger))
 ```
+Output:
 `The similarity between tiger and tiger: 1.0
 
 The similarity between tiger and cat: 0.541339
